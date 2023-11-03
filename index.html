@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>Hi Satya</div>
+  </body>
+
+  <script>
+    // function keysToCamelCase(obj) {
+    //   if (Array.isArray(obj)) {
+    //     return obj.map(keysToCamelCase);
+    //   } else if (obj !== null && typeof obj === "object") {
+    //     return Object.keys(obj).reduce((acc, key) => {
+    //       const camelCaseKey = key.replace(/_([a-z])/g, (_, char) =>
+    //         char.toUpperCase()
+    //       );
+    //       acc[camelCaseKey] = obj[key];
+    //       return acc;
+    //     }, {});
+    //   }
+    //   return obj;
+    // }
+
+    // const originalJson = {
+    //   first_name: "Satya",
+    //   last_name: "kumar",
+    //   address_info: {
+    //     street_address: "1013 sector 23A St",
+    //     postal_code: "122016",
+    //   },
+    // };
+
+    // const camelCaseKeysJson = keysToCamelCase(originalJson);
+    // console.log(camelCaseKeysJson);
+
+    function keysToCamelCase(obj) {
+      if (Array.isArray(obj)) {
+        return obj.map(keysToCamelCase);
+      } else if (obj !== null && typeof obj === "object") {
+        return Object.keys(obj).reduce((acc, key) => {
+          const camelCaseKey = key.replace(/_([a-z])/g, (_, char) =>
+            char.toUpperCase()
+          );
+          acc[camelCaseKey] = keysToCamelCase(obj[key]);
+          return acc;
+        }, {});
+      }
+      return obj;
+    }
+
+    const originalJson = {
+      first_name: "John",
+      last_name: "Doe",
+      address_info: {
+        street_address: "123 Main St",
+        postal_code: "12345",
+      },
+    };
+
+    const camelCaseKeysJson = keysToCamelCase(originalJson);
+
+    console.log(camelCaseKeysJson);
+  </script>
+</html>
